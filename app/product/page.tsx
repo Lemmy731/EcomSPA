@@ -1,51 +1,28 @@
-import { Product } from '../types/product';
-import ProductCard from './ProductCard';
-import bed from '../../public/icon_bed.png'
-import tv from '../../public/icon_tv.png'
+"use client";
 
-// async function getProducts(): Promise<Product[]> {
-//   const res = await fetch("https://localhost:5001/api/products", {
-//     cache: "no-store",
-//   });
+import axios from "axios";
+import { useEffect, useState } from "react";
+import ProductCard from "./ProductCard"; // assuming you have this
 
-//   return res.json();
-// }
+export default function ProductsPage() {
+  const [products, setProducts] = useState([]);
 
-export default async function ProductsPage() {
-//   const products = await getProducts();
-  const products =  [{
-id : 123,
-imageUrl : "",
-name : "shirt",
-description : "good",
-color : "yellow",
-size : "50",
-price : 900,
-},
-{
-id : 124,
-imageUrl : "",
-name : "shirt",
-description : "good",
-color : "black",
-size : "45",
-price : 1500,
-},
-{
-id : 125,
-imageUrl : "tv",
-name : "shoe",
-description : "good",
-color : "black",
-size : "size",
-price : 4000,
-}
-]
+  useEffect(() => {
+    axios
+      .get("https://localhost:44338/api/Product/products", {
+        withCredentials: true, 
+         httpsAgent: new (require("https").Agent)({
+          rejectUnauthorized: false,
+        }),
+      })
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <div className="grid grid-cols-3 gap-6 p-10">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product : any, index) => (
+        <ProductCard key={product.id} product={product} index={index} />
       ))}
     </div>
   );

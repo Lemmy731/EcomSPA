@@ -9,7 +9,7 @@ export default function Header() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="flex justify-between p-4 shadow">
+    <div className="flex justify-between p-4 shadow text-white bg-black">
       <Link href="/product">Home</Link>
 
       <Link href="/cart">

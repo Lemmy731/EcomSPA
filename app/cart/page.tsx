@@ -15,7 +15,7 @@ export default function CartPage() {
         <div key={item.id} className="border p-4 mb-3">
           <h3>{item.name}</h3>
           <p>₦{item.price}</p>
-
+1
           <div className="flex gap-3 items-center">
             <button onClick={() => decreaseQty(item.id)}>-</button>
             <span>{item.quantity}</span>
